@@ -1,5 +1,8 @@
 # ComfyUI Advanced Detailer Pipe
 
+<img width="551" height="959" alt="image" src="https://github.com/user-attachments/assets/8254b036-04f4-4b27-8b13-1454ea00b728" />
+
+
 ## 中文
 
 为 ComfyUI-Impact-Pack 的 **DetailerDebug (SEGS/pipe)** 增加 Advanced KSampler 风格的起始步数和终止步数控制。
