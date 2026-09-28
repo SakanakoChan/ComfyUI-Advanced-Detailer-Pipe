@@ -44,7 +44,9 @@ end_at_step = total_steps
 
 ### Impact Pack 版本要求
 
-本插件需要 Impact Pack 的 detailer 采样接口支持 `start_at_step` 和 `end_at_step` 参数。原版 Impact Pack 如果没有包含这项接口改动，运行新节点时会因不认识这两个参数而报错；请使用包含对应改动的 Impact Pack 版本。
+本插件依赖 ComfyUI-Impact-Pack 提供 SEGS、pipe 和相关图像工具，但不要求修改 Impact Pack。请安装原版 ComfyUI-Impact-Pack。
+
+本插件的局部 Detailer 处理代码改编自 ComfyUI-Impact-Pack，并遵循 GPL-3.0；许可文本见 `LICENSE.txt`。
 
 ## English
 
@@ -87,4 +89,6 @@ Keeps the original Debug Pipe outputs: `image`, `segs`, `basic_pipe`, `cropped`,
 
 #### Impact Pack version requirement
 
-This plugin requires the Impact Pack detailer sampling interface to support the `start_at_step` and `end_at_step` parameters. If your Impact Pack version does not include this interface change, the node will report an unexpected keyword argument error. Use an Impact Pack version that includes the corresponding changes.
+This plugin uses ComfyUI-Impact-Pack for SEGS, pipe, and image utilities, but does not require modifications to Impact Pack. Install the original ComfyUI-Impact-Pack.
+
+The local Detailer processing code is adapted from ComfyUI-Impact-Pack and is licensed under GPL-3.0; see `LICENSE.txt`.

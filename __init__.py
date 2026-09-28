@@ -1,5 +1,6 @@
 import os
 import sys
+import importlib.util
 
 import nodes
 
@@ -9,6 +10,13 @@ if impact_modules not in sys.path:
     sys.path.append(impact_modules)
 
 from impact import utils
+
+detailer_spec = importlib.util.spec_from_file_location(
+    "advanced_detailer_pipe_detailer", os.path.join(os.path.dirname(__file__), "detailer.py"))
+detailer_module = importlib.util.module_from_spec(detailer_spec)
+sys.modules[detailer_spec.name] = detailer_module
+detailer_spec.loader.exec_module(detailer_module)
+detailer_do_detail = detailer_module.detailer_do_detail
 
 
 class AdvancedDetailerDebugPipe:
@@ -52,10 +60,10 @@ class AdvancedDetailerDebugPipe:
             refiner_model, refiner_clip, _, refiner_positive, refiner_negative = refiner_basic_pipe_opt
 
         enhanced_img, cropped, cropped_enhanced, cropped_enhanced_alpha, cnet_images, new_segs = \
-            nodes.NODE_CLASS_MAPPINGS["DetailerForEach"].do_detail(
+            detailer_do_detail(
                 image, segs, model, clip, vae, guide_size, guide_size_for, max_size, seed, steps, cfg,
-                sampler_name, scheduler, positive, negative, 1.0, feather, noise_mask, force_inpaint,
-                wildcard, detailer_hook,
+                sampler_name, scheduler, positive, negative, feather, noise_mask, force_inpaint,
+                wildcard_opt=wildcard, detailer_hook=detailer_hook,
                 refiner_ratio=refiner_ratio, refiner_model=refiner_model, refiner_clip=refiner_clip,
                 refiner_positive=refiner_positive, refiner_negative=refiner_negative, cycle=cycle,
                 inpaint_model=inpaint_model, noise_mask_feather=noise_mask_feather,
