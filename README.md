@@ -9,6 +9,8 @@
 
 新节点名称：**DetailerDebug (SEGS/pipe Advanced)**
 
+同时提供 **Ultimate SD Upscale (Advanced Steps)**，可用 `start_at_step` 和 `end_at_step` 控制每个 tile 的采样范围。
+
 ## 功能
 
 - 保留原节点的 SEGS、`BASIC_PIPE` 输入和调试输出。
@@ -36,11 +38,14 @@ end_at_step = total_steps
 
 节点保留原 Debug Pipe 的输出：`image`、`segs`、`basic_pipe`、`cropped`、`cropped_refined`、`cropped_refined_alpha` 和 `cnet_images`。
 
+Advanced Steps 版 Ultimate SD Upscale 保留原节点的切块、放大和接缝修复设置；`end_at_step` 超出总步数时会在最后一步结束。结束步会完整去噪。
+
 ## 安装
 
 1. 将本插件放到 `ComfyUI/custom_nodes/ComfyUI-Advanced-Detailer-Pipe`。
 2. 安装 ComfyUI-Impact-Pack，并确保它与本插件位于同一个 `custom_nodes` 目录。
-3. 重启 ComfyUI。
+3. 使用 Ultimate SD Upscale Advanced Steps 节点时，也需安装 ComfyUI_UltimateSDUpscale。
+4. 重启 ComfyUI。
 
 ### Impact Pack 版本要求
 
@@ -53,6 +58,8 @@ end_at_step = total_steps
 Adds Advanced KSampler-style start and end step controls to ComfyUI-Impact-Pack's **DetailerDebug (SEGS/pipe)** node.
 
 Node name: **DetailerDebug (SEGS/pipe Advanced)**
+
+The plugin also provides **Ultimate SD Upscale (Advanced Steps)**, which controls each tile's sampling range with `start_at_step` and `end_at_step`.
 
 ### Features
 
@@ -81,11 +88,14 @@ end_at_step = total_steps
 
 Keeps the original Debug Pipe outputs: `image`, `segs`, `basic_pipe`, `cropped`, `cropped_refined`, `cropped_refined_alpha`, and `cnet_images`.
 
+The Advanced Steps Ultimate SD Upscale node keeps the original tiling, upscaling, and seam-fix settings. An `end_at_step` greater than the step count ends at the final step, with full denoising.
+
 ### Installation
 
 1. Place this plugin in `ComfyUI/custom_nodes/ComfyUI-Advanced-Detailer-Pipe`.
 2. Install ComfyUI-Impact-Pack alongside this plugin in the same `custom_nodes` directory.
-3. Restart ComfyUI.
+3. Install ComfyUI_UltimateSDUpscale to use the Ultimate SD Upscale Advanced Steps node.
+4. Restart ComfyUI.
 
 #### Impact Pack version requirement
 

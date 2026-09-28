@@ -18,6 +18,12 @@ sys.modules[detailer_spec.name] = detailer_module
 detailer_spec.loader.exec_module(detailer_module)
 detailer_do_detail = detailer_module.detailer_do_detail
 
+usdu_spec = importlib.util.spec_from_file_location(
+    "advanced_detailer_pipe_ultimate_sd_upscale", os.path.join(os.path.dirname(__file__), "ultimate_sd_upscale.py"))
+usdu_module = importlib.util.module_from_spec(usdu_spec)
+sys.modules[usdu_spec.name] = usdu_module
+usdu_spec.loader.exec_module(usdu_module)
+
 
 class AdvancedDetailerDebugPipe:
     @classmethod
@@ -85,8 +91,10 @@ class AdvancedDetailerDebugPipe:
 
 NODE_CLASS_MAPPINGS = {
     "AdvancedDetailerDebugPipe": AdvancedDetailerDebugPipe,
+    **usdu_module.NODE_CLASS_MAPPINGS,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AdvancedDetailerDebugPipe": "DetailerDebug (SEGS/pipe Advanced)",
+    **usdu_module.NODE_DISPLAY_NAME_MAPPINGS,
 }
