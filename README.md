@@ -40,6 +40,14 @@ end_at_step = total_steps
 
 Advanced Steps 版 Ultimate SD Upscale 保留原节点的切块、放大和接缝修复设置；`end_at_step` 超出总步数时会在最后一步结束。结束步会完整去噪。
 
+## No Upscale 步数版
+
+**Ultimate SD Upscale (No Upscale, Advanced Steps)** 接收 `upscaled_image`，只做分块重绘，不提供 `upscale_by`、`upscale_model` 或主采样的 `denoise` 输入。尺寸对齐、接缝修复和批处理规则沿用原版 USDU。
+
+例如 `steps=11`、`start_at_step=7`、`end_at_step=10000` 会执行 4 次采样迭代；若设为 `end_at_step=9`，则执行 2 次并在结束步完整去噪。空采样范围会跳过采样。
+
+将图片连接到 `upscaled_image`，再将节点的 `IMAGE` 输出连接到 Preview Image 或 Save Image。此节点同样依赖 ComfyUI_UltimateSDUpscale 和 Impact Pack。
+
 ## 安装
 
 1. 将本插件放到 `ComfyUI/custom_nodes/ComfyUI-Advanced-Detailer-Pipe`。
@@ -89,6 +97,14 @@ end_at_step = total_steps
 Keeps the original Debug Pipe outputs: `image`, `segs`, `basic_pipe`, `cropped`, `cropped_refined`, `cropped_refined_alpha`, and `cnet_images`.
 
 The Advanced Steps Ultimate SD Upscale node keeps the original tiling, upscaling, and seam-fix settings. An `end_at_step` greater than the step count ends at the final step, with full denoising.
+
+### No Upscale with step controls
+
+**Ultimate SD Upscale (No Upscale, Advanced Steps)** takes `upscaled_image` and performs tiled refinement. It has no `upscale_by`, `upscale_model`, or main sampling `denoise` input. Size alignment, seam fixing, and batching follow the original USDU implementation.
+
+For example, `steps=11`, `start_at_step=7`, and `end_at_step=10000` perform 4 sampling iterations. Setting `end_at_step=9` performs 2 iterations and fully denoises at the end. An empty sampling range skips sampling.
+
+Connect the source image to `upscaled_image` and the node's `IMAGE` output to Preview Image or Save Image. This node also requires ComfyUI_UltimateSDUpscale and Impact Pack.
 
 ### Installation
 
